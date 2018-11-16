@@ -15,8 +15,22 @@ class ImageController extends Controller
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$res = curl_exec($ch);
-		if ($request->input('url') === NULL || $request->input('url') === '' || curl_getinfo($ch, CURLINFO_HTTP_CODE) > 399) {
+		
+		$exts = [
+		'png',
+		'jpg',
+		'jpeg',
+		];
+		
+		$string = parse_url($request->input('url'), PHP_URL_PATH);
+		$array = explode('.', $string);
+		
+		$current_ext = $array[count($array) -1];
+		
+		if ($request->input('url') === NULL || $request->input('url') === '' || curl_getinfo($ch, CURLINFO_HTTP_CODE) > 399 || !in_array($current_ext, $exts)) 
+		{
 			Log::info($ch);
+			
 			$response = Response::make('Oops! Try again..', 500);
 		} else {
 			$response = Response::make($res, 200);
