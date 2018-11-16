@@ -1,7 +1,7 @@
 {
-    "name": "khollander/imageproxy",
-    "description": "ImageProxy.",
-    "keywords": ["proxy", "image"],
+    "name": "laravel/laravel",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
     "require": {
